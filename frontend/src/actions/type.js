@@ -1,0 +1,9 @@
+export const SIGNIN='SIGNIN';
+export const SIGNUP='SIGNUP';
+export const USERS='USERS';
+export const FETCH='FETCH';
+export const FETCH_ADMIN='FETCH_ADMIN';
+export const CREATE='CREATE';
+export const UPDATE='UPDATE';
+export const DELETE='DELETE';
+export const INIT='INIT';

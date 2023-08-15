@@ -18,12 +18,24 @@ app.use(cors({
 
 app.use(express.json());
 
+if(process.env.NODE_ENV=='production')
+{
+  const target=path.resolve(__dirname,'frontend','build','index.html');
+  app.use(express.static(path.dirname(target)));
+  
+  app.get('/',(req,res)=>{
+      console.log("Production!")
+        res.sendFile(target);
+    })
+}
+
 app.use('/api/users',require('./routes/userRoutes.js'));
 app.use('/api/posts',require('./routes/postRoutes.js'));
 
 //error handling for invalid routes
-app.use(notFound);
+// app.use(notFound);
 app.use(errorHandler);
+app.use('*',(req,res)=>res.redirect('/'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
