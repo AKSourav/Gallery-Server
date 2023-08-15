@@ -21,6 +21,7 @@ app.use(express.json());
 if(process.env.NODE_ENV=='production')
 {
   const target=path.resolve(__dirname,'frontend','build','index.html');
+  console.log(target)
   app.use(express.static(path.dirname(target)));
   
   app.get('/',(req,res)=>{
