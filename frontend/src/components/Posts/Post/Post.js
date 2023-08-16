@@ -11,6 +11,7 @@ import { Avatar, Dialog } from '@mui/material';
 import { deletePostAction } from '../../../actions';
 import axios from 'axios';
 import { getPost } from '../../../api';
+import GetPost from './GetPost';
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -22,23 +23,17 @@ const Post = ({ post, setCurrentId }) => {
   };
   const handleView=async ()=>{
     setOpen(true);
-    try{
-      await axios.get(post.pic);
-      await getPost(post._id);
-      let index= post.views.findIndex((e)=>String(e)===profile._id);
-      if(index===-1)
-        post.views.push(profile?._id);
-    }catch(err)
-    {
-      console.log(err);
-    }
   }
   return (
     <>
     <Dialog onClose={handleClose} open={open}>
-      <img src={post.pic} alt='err'/>
+      <GetPost post={post}/>
     </Dialog>
     <Card className={classes.card}>
+
+    <div style={{display:"flex",justifyContent:'center',alignItems:'center', padding:"0.5rem", fontWeight:"bold"}}>
+      Created By: {post.createdBy.name}
+    </div>
     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
       <Avatar sx={{ width: 56, height: 56 }} style={{cursor:'pointer'}} src={post.pic} title={post.title}  onClick={handleView}/>
     </div>

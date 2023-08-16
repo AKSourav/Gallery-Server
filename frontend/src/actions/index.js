@@ -1,5 +1,5 @@
-import API, { createPost, deletePost, getAdminPosts, getAllPosts, searchUsers, signIn, signUp, updatePost } from '../api';
-import {SIGNIN,SIGNUP,CREATE,UPDATE,DELETE, USERS, FETCH, FETCH_ADMIN} from './type';
+import API, { createPost, deletePost, getAdminPosts, getAllPosts, getPost, searchUsers, signIn, signUp, updatePost } from '../api';
+import {SIGNIN,SIGNUP,CREATE,UPDATE,DELETE, USERS, FETCH, FETCH_ADMIN, GET_POST} from './type';
 
 // SignIn
 export const signInAction = (formData) => async (dispatch) => {
@@ -98,17 +98,17 @@ export const getAdminPostsAction = (filter) => async (dispatch) => {
   }
 };
 
-// export const getPost = (postId) => async (dispatch) => {
-//   try {
-//     // block of code to try 
-//     const { data } = await API.getAllPosts(postId);
+export const getPostAction = (postId) => async (dispatch) => {
+  try {
+    // block of code to try 
+    const { data } = await getPost(postId);
 
-//     dispatch({ type: CREATE, payload: data });
-//   } catch (error) {
-//     // block of code to handle errors
-//     console.log(error);
-//   }
-// };
+    dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+    // block of code to handle errors
+    console.log(error);
+  }
+};
 
 
 
